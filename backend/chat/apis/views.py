@@ -31,6 +31,7 @@ def api_login(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(login_sql,(user_name,pass_word))
+	db.commit()
 	if res:
 		print("登陆成功！")
 		res = {"role": "admin", "code": 0, "msg": "登录成功", "username": user_name}
@@ -46,6 +47,7 @@ def api_register(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(check_sql,(user_name))
+	db.commit()
 	if res:
 		print("用户名【%s】已存在，请重新输入！"%user_name)
 		res = {"role": "admin", "code": 0, "msg": "注册失败", "username": user_name}
