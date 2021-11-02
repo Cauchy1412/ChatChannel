@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from typing import OrderedDict
+from collections import OrderedDict
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -28,9 +28,10 @@ store_sql = 'insert into apis_chatmsg(username,msg,gentime) values(%s,%s,%s)'
 def api_login(request):
 	user_name = request.data.get("username")
 	pass_word = request.data.get("password")
-	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(login_sql,(user_name,pass_word))
+	db.commit()
 	if res:
 		print("登陆成功！")
 		res = {"role": "admin", "code": 0, "msg": "登录成功", "username": user_name}
@@ -43,9 +44,10 @@ def api_login(request):
 def api_register(request):
 	user_name = request.data.get("username")
 	pass_word = request.data.get("password")
-	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(check_sql,(user_name))
+	db.commit()
 	if res:
 		print("用户名【%s】已存在，请重新输入！"%user_name)
 		res = {"role": "admin", "code": 0, "msg": "注册失败", "username": user_name}
@@ -58,7 +60,7 @@ def api_register(request):
 @api_view(['GET', 'POST'])
 def history_msg(request):
 	if request.method == 'GET':
-		db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+		db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 		cursor = db.cursor()
 		res = cursor.execute(query_sql)
 		res = cursor.fetchall()
@@ -70,7 +72,7 @@ def history_msg(request):
 		gentime = request.data.get('gentime')
 		gentime = gentime.replace('T',' ')
 		gentime = gentime.replace('Z','000')
-		db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+		db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 		cursor = db.cursor()
 		print(username,msg,gentime)
 		cursor.execute(store_sql,(username,msg,gentime))
@@ -86,7 +88,7 @@ def delete_msg(request):
 	gentime = gentime.replace('T',' ')
 	gentime = gentime.replace('Z','000')
 	print(username,msg,gentime)
-	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 	cursor = db.cursor()
 	cursor.execute(delete_sql,(username,msg,gentime))
 	db.commit()
@@ -97,7 +99,7 @@ def delete_msg(request):
 def update_password(request):
 	user_name = request.data.get("username")
 	pass_word = request.data.get("password")
-	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="xyf010830",database="tempdb")
+	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password="011119",database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(update_sql,(user_name,pass_word,user_name))
 	res = {"role": "admin", "code": 0, "msg": "修改密码成功", "username": user_name}
