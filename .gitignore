@@ -4,3 +4,5 @@ frontend/package.json
 frontend/node_modules/
 frontend/dist/
 backend/chat/apis/password.json
+*.pyc
+*.json
