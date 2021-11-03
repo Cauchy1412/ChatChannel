@@ -1,8 +1,5 @@
 backend/chat/chat/settings.py
-frontend/package-lock.json
-frontend/package.json
 frontend/node_modules/
 frontend/dist/
-backend/chat/apis/password.json
 *.pyc
 *.json
