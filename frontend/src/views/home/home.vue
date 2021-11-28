@@ -14,6 +14,7 @@
       <mu-bottom-nav-item value="home" title="主页" icon="restore" to='/' />
       <mu-bottom-nav-item value="me" title="个人中心" icon="favorite" to='/me' />
       <mu-bottom-nav-item value="about" title="关于" icon="location_on" to='/about' />
+      <mu-bottom-nav-item value="dynamics" title="动态" icon="location_on" to='/dynamics' />
     </mu-bottom-nav>
     </div>
   </div>
