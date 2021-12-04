@@ -49,8 +49,8 @@ export default {
 .comment-wrap {
   width: 522px;
   margin-bottom: 10px;
-  background-color: #FFD3D1FF;
   .comments-list {
+    background-color: #F0F8FF;
     margin-top: 20px;
     .comments-list-item {
       margin-bottom: 20px;
