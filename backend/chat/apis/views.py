@@ -35,7 +35,11 @@ join_room_sql = 'insert into userInRoom(room_name,user_name) values(%s,%s)'
 
 add_dynamic_sql = 'insert into dynamic(user_name,content,gen_time) values(%s,%s,%s)'
 
-add_comment_sql = 'insert into comment(user_name,dynamicId,content,gen_time) values(%s,%s,%s,%s)'
+add_comment_sql = 'insert into comment(user_name,dynamic_id,content,gen_time) values(%s,%s,%s,%s)'
+
+query_dynamics_sql = 'select * from dynamic'
+
+query_comment_sql = 'select * from comment where dynamic_id=%s order by id'
 
 # Create your views here.
 @api_view(['POST'])
@@ -116,6 +120,7 @@ def update_password(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(update_sql,(user_name,pass_word,user_name))
+	db.commit()
 	res = {"role": "admin", "code": 0, "msg": "修改密码成功", "username": user_name}
 	return Response(res, status=status.HTTP_200_OK)
 
@@ -127,6 +132,7 @@ def add_chat_room(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(add_chat_room_sql,(admin_name,room_name, gen_time))
+	db.commit()
 	res = {"role": "admin", "code": 0, "msg": "添加聊天室成功", "username": admin_name}
 	return Response(res, status=status.HTTP_200_OK)
 
@@ -137,6 +143,7 @@ def join_room(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(update_sql,(user_name,room_name))
+	db.commit()
 	res = {"role": "admin", "code": 0, "msg": "加入聊天室成功", "username": user_name}
 	return Response(res, status=status.HTTP_200_OK)
 
@@ -148,6 +155,7 @@ def add_dynamic(request):
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(add_dynamic_sql,(user_name,content,gen_time))
+	db.commit()
 	res = {"role": "admin", "code": 0, "msg": "添加动态成功", "username": user_name}
 	return Response(res, status=status.HTTP_200_OK)
 
@@ -157,9 +165,30 @@ def add_comment(request):
 	dynamic_id = request.data.get("dynamic_id")
 	content = request.data.get("content")
 	gen_time = request.data.get("gen_time")
+	gen_time = gen_time.replace('T',' ')
+	gen_time = gen_time.split(".")[0]
+	print(gen_time)
 	db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
 	cursor = db.cursor()
 	res = cursor.execute(add_comment_sql,(user_name,dynamic_id,content,gen_time))
+	db.commit()
 	res = {"role": "admin", "code": 0, "msg": "添加评论成功", "username": user_name}
 	return Response(res, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def get_dynamics(request):
+	if request.method == 'GET':
+		db = pymysql.connect(host="127.0.0.1",port=3306,user="root",password=MyPassWord,database="tempdb")
+		cursor = db.cursor()
+		res = cursor.execute(query_dynamics_sql)
+		res = cursor.fetchall()
+		dynamic_comments = []
+		for obj in res:
+			id = obj[0]
+			res_new = cursor.execute(query_comment_sql, (id))
+			res_new = cursor.fetchall()
+			res_tmp = [OrderedDict([('id', obj[0]), ('username', obj[1]), ('content', obj[3]), ('gentime', str(obj[4]))]) for obj in res_new]
+			dynamic_comments.append(res_tmp)
+						
+		newres = [OrderedDict([('id', res[i][0]), ('username', res[i][1]), ('content', res[i][2]), ('gentime', str(res[i][3])), ('comments', dynamic_comments[i])]) for i in range(len(res))]
+		return Response(newres, status=status.HTTP_200_OK)
