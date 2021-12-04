@@ -49,6 +49,7 @@ export default {
 .comment-wrap {
   width: 522px;
   margin-bottom: 10px;
+  background-color: #FFD3D1FF;
   .comments-list {
     margin-top: 20px;
     .comments-list-item {
@@ -63,7 +64,7 @@ export default {
         }
         .comments-list-item-username {
           margin-left: 5px;
-          font-weight: bold;
+          font-weight: lighter;
         }
       }
       .comments-list-item-content {
