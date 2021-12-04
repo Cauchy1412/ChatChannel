@@ -14,3 +14,11 @@ export function getHistoryDynamic () {
     method: 'get'
   })
 }
+
+export function addHistoryComment (data) {
+  return request({
+    url: '/api/add_comment/',
+    method: 'post',
+    data
+  })
+}

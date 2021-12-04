@@ -1,7 +1,7 @@
 import { loginByUsername } from '@/api/login'
 import { registerByUsername } from '@/api/register'
 import { getHistoryMsg, addHistoryMsg, delHistoryMsg } from '@/api/msg'
-import { getHistoryDynamic } from '@/api/dynamic'
+import { getHistoryDynamic, addHistoryComment } from '@/api/dynamic'
 import { setUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -138,6 +138,15 @@ export default new Vuex.Store({
     AddMessHistory ({ commit }, data) {
       return new Promise((resolve, reject) => {
         addHistoryMsg(data).then(response => {
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    AddCommentHistory ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        addHistoryComment(data).then(response => {
           resolve()
         }).catch(error => {
           reject(error)
