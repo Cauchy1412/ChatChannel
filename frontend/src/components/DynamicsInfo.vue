@@ -1,82 +1,42 @@
 <template>
-   <div class="dynamicsInfo">
-      <div class="phone">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shouji"></use>
-        </svg>
-        来自<span class="phoneNumber">{{ phoneNumber }}</span>
-      </div>
-      <div class="otherInfo">
-        <div class="read">浏览<span>72次</span></div>
-        <div class="iconBox">
-          <div @click="collect">
-            <svg :class="['icon',{iconActive:isCollect}]" aria-hidden="true">
-              <use xlink:href="#icon-icon1"></use>
-            </svg>
-            收藏
-          </div>
-          <div @click="like">
-            <svg :class="['icon',{iconActive:isLike}]" aria-hidden="true">
-              <use xlink:href="#icon-dianzan"></use>
-            </svg>
-            点赞
-          </div>
-          <div @click="comment">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-anzhuo34"></use>
-            </svg>
-            评论
-          </div>
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-iconfontforward"></use>
-            </svg>
-            转发
-          </div>
+<div class="dynamicsInfo">
+  <div class="comment-wrap">
+    <div class="comments-list">
+      <div class="comments-list-item" v-for="(item,index) in this.comments" v-bind:key="index">
+        <div class="comments-list-item-heading">
+          <img src="..\..\static\images\avatar1.jpg" />
+          <span class="comments-list-item-username">{{ item.user_name }}</span>
         </div>
+        <div class="comments-list-item-content" v-html="item.content"></div>
       </div>
-      <div class="likeList">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan"></use>
-        </svg>
-        <div class="userList"></div>
-      </div>
-      <textarea :class="['commentBox',{commentBoxHeight:isFocus}]" id="commentBox" @click="comment">评论</textarea>
-   </div>
+    </div>
+    <textarea class="comment-input" placeholder="请输入内容" id="textpanel" v-model="content"></textarea>
+    <div class="opration">
+      <div @click="saveComment" class="comment-send-btn comment-send-btn-bounce">发表评论</div>
+    </div>
+  </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
   name: 'dynamicsInfo',
+  props: ['comments'],
   data () {
     return {
-      phoneNumber: 'iphone 7 plus',
       isCollect: false,
       isLike: false,
       isComment: false,
       isFocus: false,
-      commentContent: '评论'
+      flag: false,
+      content: '',
+      commentss: []
     }
   },
   methods: {
-    collect: function () {
-      if (this.isCollect === false) {
-        this.isCollect = true
-      } else {
-        this.isCollect = false
-      }
-    },
-    like: function () {
-      if (this.isLike === false) {
-        this.isLike = true
-      } else {
-        this.isLike = false
-      }
-    },
-    comment: function () {
-      this.isFocus = true
-      document.getElementById('commentBox').focus()
-      this.commentContent = ''
+    saveComment () {
+      this.commentss.push(this.content)
+      this.content = ''
     }
   }
 }
@@ -85,11 +45,6 @@ export default {
 <style lang="stylus">
   .dynamicsInfo
     width:100%
-    .phone
-      width:100%
-      height:30px
-      line-height:30px
-      color:#999
     .otherInfo
       height: 40px
       padding-bottom: 15px
@@ -115,32 +70,100 @@ export default {
           margin-right: 15px
           &>div>span
             color:#999
-    .likeList
-      width:100%
-      height:auto
-      overflow:hidden
-      word-wrap: break-word
-      word-break: break-all
-      padding:10px 0
-      cursor:pointer
-    .commentBox
-      width:100%
-      height:40px;
-      line-height:16px;
-      border:1px solid #E7E7E7
-      margin-bottom:5px
-      padding:13px
-      resize: none;
-      overflow-y:auto
-    ::-webkit-scrollbar
-      width:2px;
-      height:2px
-    ::-webkit-scrollbar-thumb
-      background-color:#c2c2c2;
-      background-clip:padding-box;
-      min-height:18px
-    ::-webkit-scrollbar-thumb:hover
-      background-color:#A0A0A0
-    .commentBoxHeight
-      height:74px
+.comment-wrap {
+  width: 522px;
+  margin-bottom: 10px;
+  .comments-list {
+    margin-top: 20px;
+    .comments-list-item {
+      margin-bottom: 20px;
+      .comments-list-item-heading {
+        display: inline-block;
+        img {
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          vertical-align: middle;
+        }
+        .comments-list-item-username {
+          margin-left: 5px;
+          font-weight: bold;
+        }
+      }
+      .comments-list-item-content {
+        margin: 10px 0px;
+        border-bottom: 1px solid #cccccc;
+        &:last-child {
+          border-bottom: 0;
+        }
+        span {
+          vertical-align: top;
+        }
+      }
+    }
+  }
+  .comment-input {
+    height: 100px;
+    width: 500px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .opration {
+    width: 522px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    .comment-send-btn {
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid #1da1f2;
+      border-radius: 100px;
+      box-sizing: border-box;
+      font-weight: bold;
+      font-size: 13px;
+      color: #ffffff;
+      background-color: #4ab3f4;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .comment-send-btn-bounce {
+      position: relative;
+    }
+    .comment-send-btn-bounce:focus {
+      outline: none;
+    }
+    .comment-send-btn-bounce:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      border-radius: 100px;
+      border: 0px solid #1da1f2;
+      opacity: 0.7;
+      transition: all 0.1s;
+    }
+    .comment-send-btn-bounce:active:after {
+      //.bounce active时 伪元素:after的样式
+      opacity: 1;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 100px;
+      border: 2px solid #1da1f2;
+      transition: all 0.2s;
+    }
+  }
+}
 </style>

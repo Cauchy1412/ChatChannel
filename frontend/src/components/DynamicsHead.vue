@@ -1,25 +1,11 @@
 <template>
   <div class="dynamicsHead">
       <div class="avatar">
-        <img src="../assets/images/avatar.png" alt="">
+        <img src="..\..\static\images\avatar1.jpg" alt="">
       </div>
       <div class="userText">
-        <span class="userName">张花花</span>
-        <span class="time">4月22日 21:00</span>
-      </div>
-      <div class="headButton">
-          <div class="oneButton">
-            <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhiding"></use>
-          </svg>
-            置顶
-          </div>
-          <div class="oneButton">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shanchu"></use>
-            </svg>
-            删除
-          </div>
+        <span class="userName">{{ this.userName }}</span>
+        <span class="time">{{ this.getdate }}</span>
       </div>
   </div>
 </template>
@@ -27,6 +13,16 @@
 
 </style>
 <script type="text/ecmascript-6">
+import dateFormat from '../utils/date'
+export default {
+  props: ['username', 'mytime'],
+  computed: {
+    getdate () {
+      return dateFormat(new Date(this.mytime), 'yyyy-MM-dd HH:mm:ss')
+    }
+  }
+}
+
 </script>
 
 <style lang="stylus">

@@ -1,16 +1,17 @@
 <template>
   <div class="dynamicsBox">
-    <DynamicsHead></DynamicsHead>
-    <DynamicsContents></DynamicsContents>
-    <DynamicsInfo></DynamicsInfo>
+    <DynamicsHead :username=this.username :mytime=this.mytime></DynamicsHead>
+    <DynamicsContents :content=this.content></DynamicsContents>
+    <DynamicsInfo :comments=this.comments></DynamicsInfo>
   </div>
 </template>
 
 <script>
-import DynamicsHead from '../../components/DynamicsHead.vue'
-import DynamicsContents from '../../components/DynamicsContents.vue'
-import DynamicsInfo from '../../components/DynamicsInfo.vue'
+import DynamicsHead from './DynamicsHead.vue'
+import DynamicsContents from './DynamicsContents.vue'
+import DynamicsInfo from './DynamicsInfo.vue'
 export default {
+  props: ['id', 'content', 'username', 'mytime', 'comments'],
   components: {
     DynamicsHead,
     DynamicsContents,

@@ -10,7 +10,7 @@ import Home from '@/views/home/home'
 import Me from '@/views/me/me'
 import Chat from '@/views/chat/chat'
 import About from '@/views/about/about'
-import Dynamics from '@/views/dynamics/dynamics'
+import Mydynamics from '@/views/mydynamics/mydynamics'
 
 Router.prototype.goBack = function () {
   this.isBack = true
@@ -47,9 +47,9 @@ const router = new Router({
       component: About
     },
     {
-      path: '/dynamics',
-      name: 'dynamics',
-      component: Dynamics
+      path: '/mydynamics',
+      name: 'mydynamics',
+      component: Mydynamics
     }
   ]
 })

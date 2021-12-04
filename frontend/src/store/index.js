@@ -1,6 +1,7 @@
 import { loginByUsername } from '@/api/login'
 import { registerByUsername } from '@/api/register'
 import { getHistoryMsg, addHistoryMsg, delHistoryMsg } from '@/api/msg'
+import { getHistoryDynamic } from '@/api/dynamic'
 import { setUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -16,6 +17,10 @@ export default new Vuex.Store({
       info: [],
       allmessage: []
     },
+    dynamicHistory: {
+      info: [],
+      allmessage: []
+    },
     // 存放房间信息，为了方便以后做多房间
     roomDetail: {
       id: '',
@@ -28,7 +33,8 @@ export default new Vuex.Store({
     getSocket: state => state.socket,
     getUsers: state => state.roomDetail.users,
     getInfo: state => state.roomDetail.info,
-    getMsgHistoryInfo: state => state.msgHistory.info
+    getMsgHistoryInfo: state => state.msgHistory.info,
+    getDynamicsHistoryInfo: state => state.dynamicHistory.info
   },
 
   mutations: {
@@ -46,6 +52,9 @@ export default new Vuex.Store({
     },
     SET_MSG_HISTORY_INFO: (state, info) => {
       state.msgHistory.info = info
+    },
+    SET_DYNAMICS_HISTORY_INFO: (state, info) => {
+      state.dynamicHistory.info = info
     },
     DEL_ROOM_DETAIL_INFO: (state, info) => {
       state.roomDetail.info.map((val, i) => {
@@ -109,6 +118,17 @@ export default new Vuex.Store({
         getHistoryMsg().then(response => {
           const data = response.data
           commit('SET_MSG_HISTORY_INFO', data)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetDynamicsHistory ({ commit }) {
+      return new Promise((resolve, reject) => {
+        getHistoryDynamic().then(response => {
+          const data = response.data
+          commit('SET_DYNAMICS_HISTORY_INFO', data)
           resolve()
         }).catch(error => {
           reject(error)
