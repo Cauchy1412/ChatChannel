@@ -104,7 +104,7 @@ export default{
 
 <style scoped>
 .dynamic{
-   background-color: darkgray;
+   color: #000;
 }
 
 </style>
