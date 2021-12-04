@@ -3,33 +3,13 @@
      <div class="content" v-bind:class="[isOpen ? 'openHeight' : 'foldHeight']">
        {{ this.content }}
      </div>
-     <div @click="toggleContent" class="toggleText">
-       {{ toggleText }}
-     </div>
    </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
   name: 'dynamicsInfo',
-  props: ['content'],
-  data () {
-    return {
-      isOpen: false,
-      toggleText: '展开全文'
-    }
-  },
-  methods: {
-    toggleContent: function () {
-      if (this.isOpen === false) {
-        this.isOpen = true
-        this.toggleText = '收起'
-      } else {
-        this.isOpen = false
-        this.toggleText = '展开全文'
-      }
-    }
-  }
+  props: ['content']
 }
 </script>
 
