@@ -40,8 +40,8 @@
 <script>
 // import faker from 'faker'
 import { mapGetters } from 'vuex'
-import MyMsg from '../../components/myMsg'
 import OtherMsg from '../../components/otherMsg'
+import MyMsg from '../../components/myMsg'
 import { getUserName } from '@/utils/localStorage'
 
 export default{
