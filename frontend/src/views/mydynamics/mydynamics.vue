@@ -104,6 +104,6 @@ export default{
 
 <style scoped>
 .dynamics{
-   background: color-w
+   background: cornflowerblue
 }
 </style>
