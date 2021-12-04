@@ -10,7 +10,7 @@ export function adddynamic (data) {
 
 export function getHistoryDynamic () {
   return request({
-    url: '/api/history_dynamic/',
-    method: 'post'
+    url: '/api/get_dynamics/',
+    method: 'get'
   })
 }
