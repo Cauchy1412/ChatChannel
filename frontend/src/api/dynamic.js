@@ -9,8 +9,8 @@ export function adddynamic (data) {
 }
 
 export function getHistoryDynamic () {
-    return request({
-      url: '/api/history_dynamic/',
-      method: 'post'
-    })
-  }
+  return request({
+    url: '/api/history_dynamic/',
+    method: 'post'
+  })
+}
