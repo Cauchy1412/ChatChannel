@@ -1,7 +1,7 @@
 <template>
   <div class=dynamics>
     <div v-for="obj in getDynamicsHistoryInfo" :key="obj.id">
-        <dynamics :id="obj.id" :content="obj.content" :dusername="obj.username" :mytime="obj.gentime" :comments="obj.comments">
+        <dynamics :id="obj.id" :content="obj.content" :username="obj.username" :mytime="obj.gentime" :comments="obj.comments">
         </dynamics>
     </div>
   </div>

@@ -4,7 +4,7 @@
         <img src="../../static/images/avatar1.jpg" alt="">
       </div>
       <div class="userText">
-        <span class="userName">{{ this.userName }}</span>
+        <span class="userName">{{ this.username }}</span>
         <span class="time">{{ this.getdate }}</span>
       </div>
   </div>
