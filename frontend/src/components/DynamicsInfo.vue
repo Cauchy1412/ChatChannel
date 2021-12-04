@@ -5,7 +5,7 @@
       <div class="comments-list-item" v-for="(item,index) in this.comments" v-bind:key="index">
         <div class="comments-list-item-heading">
           <img src="..\..\static\images\avatar1.jpg" />
-          <span class="comments-list-item-username">{{ item.user_name }}</span>
+          <span class="comments-list-item-username">{{ item.username }}</span>
         </div>
         <div class="comments-list-item-content" v-html="item.content"></div>
       </div>
