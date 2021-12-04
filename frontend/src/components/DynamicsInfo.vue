@@ -55,7 +55,7 @@ export default {
       this.commentss.push(this.content)
       const now = new Date()
       const commentData = {
-        'username': this.name,
+        'user_name': this.name,
         'dynamic_id': this.id,
         'content': this.content,
         'gen_time': now.toISOString()
