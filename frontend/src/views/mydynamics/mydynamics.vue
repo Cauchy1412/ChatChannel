@@ -104,8 +104,6 @@ export default{
 
 <style scoped>
 .dynamics{
-  background-image: url(/static/images/dynamics.jpg);
-  background-size: 100% 100%;
-  background-position: center center;
+   background: color-w
 }
 </style>
