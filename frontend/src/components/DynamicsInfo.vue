@@ -50,7 +50,7 @@ export default {
   width: 522px;
   margin-bottom: 10px;
   .comments-list {
-    background-color: #F7F7F7;
+    background-color: #EDEDED;
     margin-top: 20px;
     .comments-list-item {
       margin-bottom: 20px;
