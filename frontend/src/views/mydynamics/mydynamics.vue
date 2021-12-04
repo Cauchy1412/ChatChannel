@@ -1,8 +1,16 @@
 <template>
   <div class=dynamic>
-    <div v-for="obj in getDynamicsHistoryInfo" :key="obj.id">
+    <div class="dynamics-header">
+      <mu-appbar title='动态'>
+        <mu-icon-button icon="chevron_left" slot="left" @click="goback" />
+        <mu-icon-button icon="expand_more" slot="right"/>
+      </mu-appbar>
+    </div>
+    <div class="dynamics-data">
+      <div class="dynamics-item" v-for="obj in getDynamicsHistoryInfo" :key="obj.id">
         <dynamics :id="obj.id" :content="obj.content" :username="obj.username" :mytime="obj.gentime" :comments="obj.comments">
         </dynamics>
+      </div>
     </div>
   </div>
 </template>
@@ -29,10 +37,10 @@ export default{
       this.$router.push({path: '/login'})
     }
     this.name = username
-    this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/chat/'))
+    this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/mydynamics/'))
   },
   mounted () {
-    // this.container = document.querySelector('.chat-content')
+    this.container = document.querySelector('.chat-content')
     const that = this
     // 初始化新的对话信息
     this.$store.dispatch('SetChatMsg')
@@ -106,5 +114,24 @@ export default{
 .dynamic{
    color: #000;
 }
+.dynamics-data{
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  overflow: scroll;
+}
+.mu-appbar {
+  text-align: center;
+  background-color: rgba(0,0,0,.78);
+}
+.chat-header {
+  position: fixed;
+  height: 50px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 
 </style>
