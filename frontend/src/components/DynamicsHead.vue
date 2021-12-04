@@ -52,6 +52,7 @@ export default {
          line-height: 25px
       .userName
         color:#333
+        font-weight: bold
       .time
         color:#999
     .headButton
