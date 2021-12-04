@@ -1,5 +1,5 @@
 <template>
-  <div class=dynamics>
+  <div class=dynamic>
     <div v-for="obj in getDynamicsHistoryInfo" :key="obj.id">
         <dynamics :id="obj.id" :content="obj.content" :username="obj.username" :mytime="obj.gentime" :comments="obj.comments">
         </dynamics>
@@ -103,7 +103,8 @@ export default{
 </script>
 
 <style scoped>
-.dynamics{
-   background: cornflowerblue
+.dynamic{
+   background-color: darkgray;
 }
+
 </style>
