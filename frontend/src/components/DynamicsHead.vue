@@ -1,7 +1,7 @@
 <template>
   <div class="dynamicsHead">
       <div class="avatar">
-        <img src="..\..\static\images\avatar1.jpg" alt="">
+        <img src="../../static/images/avatar1.jpg" alt="">
       </div>
       <div class="userText">
         <span class="userName">{{ this.userName }}</span>
