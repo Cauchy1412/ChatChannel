@@ -28,7 +28,7 @@
 <script type="text/ecmascript-6">
 import { getUserName } from '@/utils/localStorage'
 export default {
-  props: ['comments'],
+  props: ['comments', 'id'],
   data () {
     return {
       name: '',
@@ -53,10 +53,20 @@ export default {
   methods: {
     saveComment () {
       this.commentss.push(this.content)
+      const now = new Date()
+      const commentData = {
+        'username': this.name,
+        'dynamic_id': this.id,
+        'content': this.content,
+        'gen_time': now.toISOString()
+      }
+      this.$store.dispatch('AddCommentHistory', commentData)
+      this.getSocket.send(JSON.stringify(commentData))
       this.content = ''
     }
   }
 }
+
 </script>
 
 <style lang="stylus">

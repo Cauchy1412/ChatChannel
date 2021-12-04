@@ -2,7 +2,7 @@
   <div class="dynamicsBox">
     <DynamicsHead :username=this.username :mytime=this.mytime></DynamicsHead>
     <DynamicsContents :content=this.content></DynamicsContents>
-    <DynamicsInfo :comments=this.comments></DynamicsInfo>
+    <DynamicsInfo :comments=this.comments :id=this.id></DynamicsInfo>
   </div>
 </template>
 
