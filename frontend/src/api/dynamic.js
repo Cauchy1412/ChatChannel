@@ -8,10 +8,9 @@ export function adddynamic (data) {
   })
 }
 
-export function getdynamic () {
-    return request({
-      url: '/api/get_dynamic/',
-      method: 'post',
-      data
-    })
-}
+export function getHistoryDynamic () {
+    return request({
+      url: '/api/history_dynamic/',
+      method: 'post'
+    })
+  }
