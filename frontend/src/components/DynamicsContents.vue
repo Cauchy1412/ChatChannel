@@ -1,6 +1,6 @@
 <template>
    <div class="dynamicsContents">
-     <div class="content" v-bind:class="[isOpen ? 'openHeight' : 'foldHeight']">
+     <div class="content" v-bind:class="Height">
        {{ this.content }}
      </div>
    </div>
@@ -21,12 +21,8 @@ export default {
       .content
         line-height: 22px;
         overflow-y: hidden
-      .foldHeight
-        height: 110px
-      .openHeight
+      .Height
         height: auto
-      .toggleText
-        color: #a70008
-        cursor: pointer
+
 
 </style>

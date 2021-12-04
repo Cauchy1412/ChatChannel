@@ -45,31 +45,7 @@ export default {
 <style lang="stylus">
   .dynamicsInfo
     width:100%
-    .otherInfo
-      height: 40px
-      padding-bottom: 15px
-      color:#999
-      line-height: 40px;
-      border-bottom: 1px solid #E7E7E7;
-      .read
-        float:left
-        display:inline-block
-      .iconBox
-        float:right
-        &>div
-          display:inline-block
-          float:left
-          margin-right: 30px
-          color:#333
-          cursor:pointer
-          &:hover
-            color:#BA0101
-            &>.icon
-              color:#BA0101
-        &>div:last-child
-          margin-right: 15px
-          &>div>span
-            color:#999
+
 .comment-wrap {
   width: 522px;
   margin-bottom: 10px;
