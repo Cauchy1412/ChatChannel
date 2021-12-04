@@ -21,8 +21,8 @@ export default {
       .content
         line-height: 22px;
         overflow-y: hidden
+        font-weight: bold
       .Height
         height: auto
-
 
 </style>

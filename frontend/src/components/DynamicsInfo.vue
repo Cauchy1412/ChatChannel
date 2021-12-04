@@ -9,6 +9,13 @@
         </div>
         <div class="comments-list-item-content" v-html="item.content"></div>
       </div>
+      <div class="comments-list-item" v-for="(item,index) in this.comments" v-bind:key="index">
+        <div class="comments-list-item-heading">
+          <img src="../../static/images/avatar1.jpg" />
+          <span class="comments-list-item-username">{{ name }}</span>
+        </div>
+        <div class="comments-list-item-content" v-html="item"></div>
+      </div>
     </div>
     <textarea class="comment-input" placeholder="请输入内容" id="textpanel" v-model="content"></textarea>
     <div class="opration">
@@ -19,11 +26,12 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { getUserName } from '@/utils/localStorage'
 export default {
-  name: 'dynamicsInfo',
   props: ['comments'],
   data () {
     return {
+      name: '',
       isCollect: false,
       isLike: false,
       isComment: false,
@@ -32,6 +40,15 @@ export default {
       content: '',
       commentss: []
     }
+  },
+  created () {
+    const username = getUserName()
+    if (!username) {
+      // 防止未登录
+      this.$router.push({path: '/login'})
+    }
+    this.name = username
+    this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/chat/'))
   },
   methods: {
     saveComment () {
