@@ -1,6 +1,6 @@
 <template>
   <div class="dynamicsBox">
-    <DynamicsHead :username=this.username :mytime=this.mytime></DynamicsHead>
+    <DynamicsHead :username=this.dusername :mytime=this.mytime></DynamicsHead>
     <DynamicsContents :content=this.content></DynamicsContents>
     <DynamicsInfo :comments=this.comments></DynamicsInfo>
   </div>
@@ -11,7 +11,7 @@ import DynamicsHead from './DynamicsHead.vue'
 import DynamicsContents from './DynamicsContents.vue'
 import DynamicsInfo from './DynamicsInfo.vue'
 export default {
-  props: ['id', 'content', 'username', 'mytime', 'comments'],
+  props: ['id', 'content', 'dusername', 'mytime', 'comments'],
   components: {
     DynamicsHead,
     DynamicsContents,
