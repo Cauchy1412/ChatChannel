@@ -24,6 +24,13 @@
         <mu-list-item title="更新密码" @click="updatepassword">
           <mu-icon slot="left" value="send"/>
         </mu-list-item>
+        <mu-list-item title="反馈">
+          <mu-icon slot="left" value="drafts"/>
+          <mu-text-field label="反馈" type="content" labelFloat name="content" v-model="content" />
+        </mu-list-item>
+        <mu-list-item title="发送反馈" @click="sendcontent">
+          <mu-icon slot="left" value="send"/>
+        </mu-list-item>
       </mu-list>
     </div>
     <div class="logout">
@@ -34,12 +41,13 @@
 
 <script>
 import {getUserName, removeUserName} from '../../utils/localStorage'
-import { updatepassword } from '@/api/update'
+import { updatepassword, sendcontent } from '@/api/update'
 export default{
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      content: '',
     }
   },
   mounted () {
@@ -60,6 +68,16 @@ export default{
       return new Promise((resolve, reject) => {
         updatepassword(this.username, this.password).then(response => {
           alert('密码更新成功！')
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    sendcontent () {
+      return new Promise((resolve, reject) => {
+        sendcontent(this.username, this.content).then(response => {
+          alert('建议反馈成功！')
           resolve()
         }).catch(error => {
           reject(error)
