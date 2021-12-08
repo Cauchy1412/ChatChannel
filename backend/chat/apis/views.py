@@ -43,7 +43,6 @@ query_dynamics_sql = 'select * from dynamic'
 query_comment_sql = 'select * from comment where dynamic_id=%s order by id'
 
 # Create your views here.
-1
 
 @api_view(['POST'])
 def api_login(request):
