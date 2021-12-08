@@ -43,7 +43,7 @@ query_dynamics_sql = 'select * from dynamic'
 query_comment_sql = 'select * from comment where dynamic_id=%s order by id'
 
 # Create your views here.
-
+1
 
 @api_view(['POST'])
 def api_login(request):
@@ -176,6 +176,8 @@ def add_dynamic(request):
     user_name = request.data.get("user_name")
     content = request.data.get("content")
     gen_time = request.data.get("gen_time")
+    gen_time = gen_time.replace('T', ' ')
+    gen_time = gen_time.split(".")[0]
     db = pymysql.connect(host="127.0.0.1", port=3306,
                          user="root", password=MyPassWord, database="tempdb")
     cursor = db.cursor()
