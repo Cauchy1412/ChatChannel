@@ -6,7 +6,14 @@
         <mu-icon-button icon="expand_more" slot="right"/>
       </mu-appbar>
     </div>
+    
+
+
+
+
     <div class="dynamics-data">
+      <dynamicsinput :username="this.name">
+        </dynamicsinput>
       <div class="dynamics-item" v-for="obj in getDynamicsHistoryInfo" :key="obj.id">
         <dynamics :id="obj.id" :content="obj.content" :username="obj.username" :mytime="obj.gentime" :comments="obj.comments">
         </dynamics>
@@ -19,6 +26,7 @@
 // import faker from 'faker'
 import { mapGetters } from 'vuex'
 import Dynamics from '../../components/Dynamics'
+import Dynamicsinput from '../../components/Dynamicsinput'
 import { getUserName } from '@/utils/localStorage'
 
 export default{
@@ -105,7 +113,8 @@ export default{
     this.scrollToBottom()
   },
   components: {
-    'Dynamics': Dynamics
+    'Dynamics': Dynamics,
+    'Dynamicsinput': Dynamicsinput
   }
 }
 </script>

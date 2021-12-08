@@ -1,7 +1,7 @@
 import { loginByUsername } from '@/api/login'
 import { registerByUsername } from '@/api/register'
 import { getHistoryMsg, addHistoryMsg, delHistoryMsg } from '@/api/msg'
-import { getHistoryDynamic, addHistoryComment } from '@/api/dynamic'
+import { adddynamic, getHistoryDynamic, addHistoryComment } from '@/api/dynamic'
 import { setUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -147,6 +147,15 @@ export default new Vuex.Store({
     AddCommentHistory ({ commit }, data) {
       return new Promise((resolve, reject) => {
         addHistoryComment(data).then(response => {
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    Adddynamic ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        adddynamic(data).then(response => {
           resolve()
         }).catch(error => {
           reject(error)
