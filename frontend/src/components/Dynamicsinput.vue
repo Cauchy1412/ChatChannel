@@ -26,6 +26,7 @@ export default {
       }
       this.$store.dispatch('Adddynamic', Data)
       this.input = ''
+      this.$router.go(0)
     }
   }
 
