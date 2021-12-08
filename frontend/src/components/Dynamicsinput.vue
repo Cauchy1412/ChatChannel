@@ -1,6 +1,6 @@
 <template>
   <div class="dynamicsBox">
-    <textarea class="comment-input" placeholder="请输入内容" id="textpanel" v-model="content"></textarea>
+    <textarea class="comment-input" placeholder="请输入内容" id="textpanel" v-model="input"></textarea>
     <div class="opration">
       <div @click="adddynamic" class="comment-send-btn comment-send-btn-bounce">发布动态</div>
     </div>

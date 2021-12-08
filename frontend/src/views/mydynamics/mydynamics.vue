@@ -6,11 +6,6 @@
         <mu-icon-button icon="expand_more" slot="right"/>
       </mu-appbar>
     </div>
-    
-
-
-
-
     <div class="dynamics-data">
       <dynamicsinput :username="this.name">
         </dynamicsinput>

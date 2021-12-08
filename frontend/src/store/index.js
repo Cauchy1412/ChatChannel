@@ -47,6 +47,9 @@ export default new Vuex.Store({
     ADD_ROOM_DETAIL_INFO: (state, info) => {
       state.roomDetail.info.push(info)
     },
+    ADD_DYNAMICS_DETAIL_INFO: (state, info) => {
+      state.dynamicHistory.info.push(info)
+    },
     SET_ROOM_DETAIL_INFO: (state) => {
       state.roomDetail.info = []
     },
