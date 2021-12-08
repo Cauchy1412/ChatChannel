@@ -12,9 +12,9 @@ export function updatepassword (username, password) {
   })
 }
 
-export function sendcontent (user_name, content) {
+export function sendcontent (username, content) {
   const data = {
-    user_name,
+    username,
     content
   }
   return request({

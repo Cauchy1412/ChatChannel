@@ -47,7 +47,7 @@ export default{
     return {
       username: '',
       password: '',
-      content: '',
+      content: ''
     }
   },
   mounted () {
