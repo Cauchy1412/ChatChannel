@@ -228,7 +228,7 @@ def get_dynamics(request):
 
 @api_view(['POST'])
 def feedback(request):
-    user_name = request.data.get("user_name")
+    user_name = request.data.get("username")
     content = request.data.get("content")
     url = 'https://sctapi.ftqq.com/SCT82924TUHiwkqNmhueXluFlvX8ht3Gb.send?title=用户反馈&desp=' + \
         content+' --from '+user_name
