@@ -219,7 +219,7 @@ def get_dynamics(request):
             res_new = cursor.execute(query_comment_sql, (id))
             res_new = cursor.fetchall()
             res_tmp = [OrderedDict([('id', obj[0]), ('username', obj[1]), (
-                'content', obj[3]), ('gentime', str(obj[4]))]) for obj in res_new]
+                'content', obj[3]), ('gentime', str(obj[4]))]) for obj in reversed(res_new)]
             dynamic_comments.append(res_tmp)
 
         newres = [OrderedDict([('id', res[i][0]), ('username', res[i][1]), ('content', res[i][2]), (
