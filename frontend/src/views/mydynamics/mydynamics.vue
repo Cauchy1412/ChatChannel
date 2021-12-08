@@ -37,7 +37,7 @@ export default{
       this.$router.push({path: '/login'})
     }
     this.name = username
-    this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/mydynamics/'))
+    // this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/mydynamics/'))
   },
   mounted () {
     this.container = document.querySelector('.chat-content')
