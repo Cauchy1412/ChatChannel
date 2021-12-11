@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
-from .views import api_register, api_login, history_msg, join_room, update_password, delete_msg, add_chat_room, join_room, add_dynamic, add_comment, get_dynamics, feedback, get_withdrawMessages
+from .views import api_register, api_login, history_msg, join_room, update_password, delete_msg, add_chat_room, join_room, add_dynamic, add_comment, get_dynamics, feedback, get_withdrawMessages, get_feedbacks
 
 urlpatterns = [
     path('login/', api_login, name='api_login'),
@@ -14,5 +14,6 @@ urlpatterns = [
     path('add_comment/', add_comment, name='add_comment'),
     path('get_dynamics/', get_dynamics, name='get_dynamics'),
     path('feedback/', feedback, name='feedback'),
-    path('get_withdrawMessages/', get_withdrawMessages, name='get_withdrawMessages')
+    path('get_withdrawMessages/', get_withdrawMessages, name='get_withdrawMessages'),
+    path('get_feedbacks/', get_feedbacks, name='get_feedbacks')
 ]
