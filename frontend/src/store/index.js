@@ -91,7 +91,6 @@ export default new Vuex.Store({
         return new Promise((resolve, reject) => {
           delHistoryMsg(info).then(response => {
             resolve()
-            this.$router.go(0)
           }).catch(error => {
             reject(error)
           })

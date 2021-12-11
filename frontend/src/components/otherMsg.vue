@@ -31,6 +31,7 @@ export default{
         'gentime': this.mytime
       }
       this.$store.dispatch('DelChatMsg', msgData)
+      this.$router.push('/chat')
     }
   }
 }
