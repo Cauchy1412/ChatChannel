@@ -102,8 +102,8 @@ export default{
       }
       this.$store.dispatch('AddMessHistory', msgData)
       this.$store.dispatch('AddChatMsg', msgData)
-      this.getSocket.send(JSON.stringify(msgData))
       this.chatMsg = ''
+      this.getSocket.send(JSON.stringify(msgData))
     },
     scrollToBottom () {
       let container = document.querySelector('.chat-content')

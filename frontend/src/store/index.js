@@ -76,7 +76,7 @@ export default new Vuex.Store({
           }
         })
         state.msgHistory.info.map((val, i) => {
-          if (JSON.stringify(val.msg) === JSON.stringify(info)) {
+          if (JSON.stringify(val) === JSON.stringify(info)) {
             state.msgHistory.info.splice(i, 1)
             console.log('delok')
             return new Promise((resolve, reject) => {
