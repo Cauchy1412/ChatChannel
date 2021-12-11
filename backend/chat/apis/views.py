@@ -88,6 +88,7 @@ def api_register(request):
                "msg": "注册失败", "username": user_name}
     else:
         cursor.execute(register_sql, (user_name, pass_word))
+        db.commit()
         res = {"role": "admin", "code": 0,
                "msg": "注册成功", "username": user_name}
 
