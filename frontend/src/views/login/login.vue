@@ -36,13 +36,12 @@ export default{
         this.$store
           .dispatch('LoginByUsername', this.loginForm)
           .then(() => {
-            this.loginForm.password = ''
             this.$router.push({ path: '/' })
           })
           .catch(() => {
-            this.loginForm.password = ''
             console.log('登录失败，请检查用户名或密码！')
             alert('登录失败，请检查用户名或密码！')
+            this.loginForm.password = ''
           })
       } else {
         console.log('请输入用户名和密码')

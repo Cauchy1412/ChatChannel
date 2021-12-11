@@ -140,6 +140,7 @@ export default new Vuex.Store({
             resolve()
           } else {
             alert('登录失败，请检查用户名或密码！')
+            userInfo.password = ''
           }
         }).catch(error => {
           reject(error)
