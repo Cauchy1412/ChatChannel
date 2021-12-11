@@ -42,7 +42,12 @@ query_dynamics_sql = 'select * from dynamic'
 
 query_comment_sql = 'select * from comment where dynamic_id=%s order by id'
 
+add_feedback_sql = 'insert into feedback(user_name,content,gen_time) values(%s,%s,%s)'
+
+query_withdrawMessages_sql = 'select * from withdrawMessage'
+
 # Create your views here.
+
 
 @api_view(['POST'])
 def api_login(request):
@@ -231,8 +236,29 @@ def get_dynamics(request):
 def feedback(request):
     user_name = request.data.get("username")
     content = request.data.get("content")
+    gen_time = request.data.get("gen_time")
+    gen_time = gen_time.replace('T', ' ')
+    gen_time = gen_time.split(".")[0]
     url = 'https://sctapi.ftqq.com/SCT82924TUHiwkqNmhueXluFlvX8ht3Gb.send?title=用户反馈&desp=' + \
         content+' --from '+user_name
     requests.get(url)
+    db = pymysql.connect(host="127.0.0.1", port=3306,
+                         user="root", password=MyPassWord, database="tempdb")
+    cursor = db.cursor()
+    res = cursor.execute(
+        add_feedback_sql, (user_name, content, gen_time))
+    db.commit()
     res = {"role": "admin", "code": 0, "msg": "反馈成功", "username": user_name}
     return Response(res, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_withdrawMessages(request):
+    db = pymysql.connect(host="127.0.0.1", port=3306,
+                         user="root", password=MyPassWord, database="tempdb")
+    cursor = db.cursor()
+    res = cursor.execute(query_withdrawMessages_sql)
+    res = cursor.fetchall()
+    newres = [OrderedDict([('id', obj[0]), ('username', obj[1]),
+                           ('msg', obj[2]), ('gentime', str(obj[3]))]) for obj in res]
+    return Response(newres, status=status.HTTP_200_OK)
