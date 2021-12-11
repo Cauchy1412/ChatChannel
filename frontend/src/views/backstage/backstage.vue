@@ -1,7 +1,13 @@
 <template>
   <div class=dynamic>
-    <table border="1">
-  <caption>撤回消息</caption>
+      <div class="back-header">
+      <mu-appbar title='后台'>
+        <mu-icon-button icon="chevron_left" slot="left" @click="goback" />
+        <mu-icon-button icon="expand_more" slot="right"/>
+      </mu-appbar>
+    </div>
+    <table border="1" class="lebt">
+  <caption class = cap>撤回消息</caption>
   <tr>
     <th>用户名</th>
     <th>消息</th>
@@ -14,8 +20,8 @@
   </tr>
 </table>
 
-    <table border="1">
-  <caption>用户反馈</caption>
+    <table border="1" class="lebt">
+  <caption class = cap>用户反馈</caption>
   <tr>
     <th>用户名</th>
     <th>反馈内容</th>
@@ -127,5 +133,22 @@ export default{
 <style scope>
 .dynamic{
    color: #000;
+}
+.back-header {
+  position: fixed;
+  height: 50px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+.lebt {
+    position: relative;
+    top: 70px;
+    margin:auto;
+}
+.cap {
+    font-size: x-large;
+    font-weight: bold;
 }
 </style>
