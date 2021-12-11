@@ -17,6 +17,9 @@ export default {
     }
   },
   methods: {
+    sleep (time) {
+      return new Promise((resolve) => setTimeout(resolve, time))
+    },
     adddynamic () {
       const now = new Date()
       const Data = {
@@ -26,7 +29,9 @@ export default {
       }
       this.$store.dispatch('Adddynamic', Data)
       this.input = ''
-      this.$router.go(0)
+      this.sleep(10).then(() => {
+        this.$router.go(0)
+      })
     }
   }
 
