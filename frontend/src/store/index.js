@@ -62,31 +62,39 @@ export default new Vuex.Store({
     DEL_ROOM_DETAIL_INFO: (state, info) => {
       const name = getUserName()
       if (name === 'admin') {
-        state.roomDetail.info.map((val, i) => {
-          if (JSON.stringify(val) === JSON.stringify(info)) {
-            state.roomDetail.info.splice(i, 1)
-            console.log('delok')
-            return new Promise((resolve, reject) => {
-              delHistoryMsg(info).then(response => {
-                resolve()
-              }).catch(error => {
-                reject(error)
-              })
-            })
-          }
-        })
-        state.msgHistory.info.map((val, i) => {
-          if (JSON.stringify(val) === JSON.stringify(info)) {
-            state.msgHistory.info.splice(i, 1)
-            console.log('delok')
-            return new Promise((resolve, reject) => {
-              delHistoryMsg(info).then(response => {
-                resolve()
-              }).catch(error => {
-                reject(error)
-              })
-            })
-          }
+        // state.roomDetail.info.map((val, i) => {
+        //   if (JSON.stringify(val) === JSON.stringify(info)) {
+        //     state.roomDetail.info.splice(i, 1)
+        //     console.log('delok')
+        //     return new Promise((resolve, reject) => {
+        //       delHistoryMsg(info).then(response => {
+        //         resolve()
+        //       }).catch(error => {
+        //         reject(error)
+        //       })
+        //     })
+        //   }
+        // })
+        // state.msgHistory.info.map((val, i) => {
+        //   if (JSON.stringify(val) === JSON.stringify(info)) {
+        //     state.msgHistory.info.splice(i, 1)
+        //     console.log('delok')
+        //     return new Promise((resolve, reject) => {
+        //       delHistoryMsg(info).then(response => {
+        //         resolve()
+        //       }).catch(error => {
+        //         reject(error)
+        //       })
+        //     })
+        //   }
+        // })
+        return new Promise((resolve, reject) => {
+          delHistoryMsg(info).then(response => {
+            resolve()
+            this.$router.go(0)
+          }).catch(error => {
+            reject(error)
+          })
         })
       } else {
         if (name === info.username) {
