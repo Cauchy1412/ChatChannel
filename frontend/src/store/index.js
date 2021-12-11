@@ -90,13 +90,6 @@ export default new Vuex.Store({
             })
           }
         })
-        return new Promise((resolve, reject) => {
-          delHistoryMsg(info).then(response => {
-            resolve()
-          }).catch(error => {
-            reject(error)
-          })
-        })
       } else {
         if (name === info.username) {
           state.roomDetail.info.map((val, i) => {
