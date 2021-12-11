@@ -36,11 +36,11 @@ export default{
         this.$store
           .dispatch('LoginByUsername', this.loginForm)
           .then(() => {
-            this.password = ''
+            this.loginForm.password = ''
             this.$router.push({ path: '/' })
           })
           .catch(() => {
-            this.password = ''
+            this.loginForm.password = ''
             console.log('登录失败，请检查用户名或密码！')
             alert('登录失败，请检查用户名或密码！')
           })
@@ -53,16 +53,16 @@ export default{
         this.$store
           .dispatch('RegisterByUsername', this.loginForm)
           .then(() => {
-            this.password = ''
+            this.loginForm.password = ''
             this.$router.push({ path: '/' })
           })
           .catch(() => {
-            this.password = ''
+            this.loginForm.password = ''
             console.log('注册失败，请检查用户名或密码！')
             alert('您的用户名已被使用！')
           })
       } else {
-        this.password = ''
+        this.loginForm.password = ''
         console.log('请输入用户名和密码随意')
         alert('请输入用户名和密码')
       }
