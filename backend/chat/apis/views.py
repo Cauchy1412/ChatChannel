@@ -236,7 +236,7 @@ def get_dynamics(request):
 def feedback(request):
     user_name = request.data.get("username")
     content = request.data.get("content")
-    gen_time = request.data.get("gen_time")
+    gen_time = request.data.get("gentime")
     gen_time = gen_time.replace('T', ' ')
     gen_time = gen_time.split(".")[0]
     url = 'https://sctapi.ftqq.com/SCT82924TUHiwkqNmhueXluFlvX8ht3Gb.send?title=用户反馈&desp=' + \
