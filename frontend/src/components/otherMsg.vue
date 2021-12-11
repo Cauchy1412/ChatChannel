@@ -1,5 +1,5 @@
 <template>
-    <div class="item-left">
+    <div class="item-left" @dblclick="del">
         <div class="name-left">
             <span v-if="mytime">{{ getdate }}</span> &nbsp;&nbsp;{{ name }}
         </div>
@@ -20,6 +20,17 @@ export default{
   computed: {
     getdate () {
       return dateFormat(new Date(this.mytime), 'yyyy-MM-dd HH:mm:ss')
+    }
+  },
+  methods: {
+    del () {
+      console.log('delete')
+      const msgData = {
+        'username': this.name,
+        'msg': this.msg,
+        'gentime': this.mytime
+      }
+      this.$store.dispatch('DelChatMsg', msgData)
     }
   }
 }

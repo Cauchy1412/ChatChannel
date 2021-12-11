@@ -2,7 +2,7 @@ import { loginByUsername } from '@/api/login'
 import { registerByUsername } from '@/api/register'
 import { getHistoryMsg, addHistoryMsg, delHistoryMsg } from '@/api/msg'
 import { adddynamic, getHistoryDynamic, addHistoryComment } from '@/api/dynamic'
-import { setUserName } from '@/utils/localStorage'
+import { setUserName, getUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -60,19 +60,51 @@ export default new Vuex.Store({
       state.dynamicHistory.info = info
     },
     DEL_ROOM_DETAIL_INFO: (state, info) => {
-      state.roomDetail.info.map((val, i) => {
-        if (JSON.stringify(val) === JSON.stringify(info)) {
-          state.roomDetail.info.splice(i, 1)
-          console.log('delok')
-          return new Promise((resolve, reject) => {
-            delHistoryMsg(info).then(response => {
-              resolve()
-            }).catch(error => {
-              reject(error)
+      const name = getUserName()
+      if (name === 'admin') {
+        state.roomDetail.info.map((val, i) => {
+          if (JSON.stringify(val) === JSON.stringify(info)) {
+            state.roomDetail.info.splice(i, 1)
+            console.log('delok')
+            return new Promise((resolve, reject) => {
+              delHistoryMsg(info).then(response => {
+                resolve()
+              }).catch(error => {
+                reject(error)
+              })
             })
+          }
+        })
+        state.msgHistory.info.map((val, i) => {
+          if (JSON.stringify(val.msg) === JSON.stringify(info)) {
+            state.msgHistory.info.splice(i, 1)
+            console.log('delok')
+            return new Promise((resolve, reject) => {
+              delHistoryMsg(info).then(response => {
+                resolve()
+              }).catch(error => {
+                reject(error)
+              })
+            })
+          }
+        })
+      } else {
+        if (name === info.username) {
+          state.roomDetail.info.map((val, i) => {
+            if (JSON.stringify(val) === JSON.stringify(info)) {
+              state.roomDetail.info.splice(i, 1)
+              console.log('delok')
+              return new Promise((resolve, reject) => {
+                delHistoryMsg(info).then(response => {
+                  resolve()
+                }).catch(error => {
+                  reject(error)
+                })
+              })
+            }
           })
         }
-      })
+      }
     }
   },
 
@@ -84,6 +116,9 @@ export default new Vuex.Store({
           const data = response.data
           console.log(data.msg)
           if (data.msg === '登录成功') {
+            if (username === 'admin') {
+              alert('您好，尊敬的管理员')
+            }
             commit('SET_USERS', data.username)
             setUserName(data.username)
             resolve()

@@ -12,10 +12,11 @@ export function updatepassword (username, password) {
   })
 }
 
-export function sendcontent (username, content) {
+export function sendcontent (username, content, gen_time) {
   const data = {
     username,
-    content
+    content,
+    gen_time
   }
   return request({
     url: '/api/feedback/',

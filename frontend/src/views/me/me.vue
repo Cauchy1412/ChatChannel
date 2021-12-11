@@ -75,8 +75,9 @@ export default{
       })
     },
     sendcontent () {
+      const now = new Date()
       return new Promise((resolve, reject) => {
-        sendcontent(this.username, this.content).then(response => {
+        sendcontent(this.username, this.content, now.toISOString()).then(response => {
           alert('建议反馈成功！')
           resolve()
         }).catch(error => {
@@ -103,7 +104,7 @@ export default{
   position: absolute;
   left: 10%;
   right: 10%;
-  top: 70%;
+  top: 80%;
 }
 .mu-appbar {
   position: absolute;
