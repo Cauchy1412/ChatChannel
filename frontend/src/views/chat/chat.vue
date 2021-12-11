@@ -100,9 +100,9 @@ export default{
         'msg': this.chatMsg,
         'gentime': now.toISOString()
       }
+      this.chatMsg = ''
       this.$store.dispatch('AddMessHistory', msgData)
       this.$store.dispatch('AddChatMsg', msgData)
-      this.chatMsg = ''
       this.getSocket.send(JSON.stringify(msgData))
     },
     scrollToBottom () {

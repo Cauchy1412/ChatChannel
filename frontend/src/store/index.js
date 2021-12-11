@@ -62,32 +62,34 @@ export default new Vuex.Store({
     DEL_ROOM_DETAIL_INFO: (state, info) => {
       const name = getUserName()
       if (name === 'admin') {
-        // state.roomDetail.info.map((val, i) => {
-        //   if (JSON.stringify(val) === JSON.stringify(info)) {
-        //     state.roomDetail.info.splice(i, 1)
-        //     console.log('delok')
-        //     return new Promise((resolve, reject) => {
-        //       delHistoryMsg(info).then(response => {
-        //         resolve()
-        //       }).catch(error => {
-        //         reject(error)
-        //       })
-        //     })
-        //   }
-        // })
-        // state.msgHistory.info.map((val, i) => {
-        //   if (JSON.stringify(val) === JSON.stringify(info)) {
-        //     state.msgHistory.info.splice(i, 1)
-        //     console.log('delok')
-        //     return new Promise((resolve, reject) => {
-        //       delHistoryMsg(info).then(response => {
-        //         resolve()
-        //       }).catch(error => {
-        //         reject(error)
-        //       })
-        //     })
-        //   }
-        // })
+        console.log('hello admin')
+        state.roomDetail.info.map((val, i) => {
+          if (JSON.stringify(val) === JSON.stringify(info)) {
+            state.roomDetail.info.splice(i, 1)
+            console.log('delok1111111')
+            return new Promise((resolve, reject) => {
+              delHistoryMsg(info).then(response => {
+                resolve()
+              }).catch(error => {
+                reject(error)
+              })
+            })
+          }
+        })
+        state.msgHistory.info.map((val, i) => {
+          if (val.msg === info.msg && val.gentime === info.gentime && val.username === info.username) {
+            console.log(val.msg)
+            state.msgHistory.info.splice(i, 1)
+            console.log('delok123')
+            return new Promise((resolve, reject) => {
+              delHistoryMsg(info).then(response => {
+                resolve()
+              }).catch(error => {
+                reject(error)
+              })
+            })
+          }
+        })
         return new Promise((resolve, reject) => {
           delHistoryMsg(info).then(response => {
             resolve()
@@ -100,7 +102,7 @@ export default new Vuex.Store({
           state.roomDetail.info.map((val, i) => {
             if (val.msg === info.msg && val.username === info.username && val.gentime === info.gentime) {
               state.roomDetail.info.splice(i, 1)
-              console.log('delok')
+              console.log('delok111')
               return new Promise((resolve, reject) => {
                 delHistoryMsg(info).then(response => {
                   resolve()
