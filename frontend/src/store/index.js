@@ -91,7 +91,7 @@ export default new Vuex.Store({
       } else {
         if (name === info.username) {
           state.roomDetail.info.map((val, i) => {
-            if (JSON.stringify(val) === JSON.stringify(info)) {
+            if (val.msg === info.msg && val.username === info.username && val.gentime === info.gentime) {
               state.roomDetail.info.splice(i, 1)
               console.log('delok')
               return new Promise((resolve, reject) => {
