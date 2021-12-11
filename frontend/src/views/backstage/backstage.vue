@@ -142,6 +142,10 @@ export default{
   width: 100%;
   z-index: 1;
 }
+.mu-appbar {
+  text-align: center;
+  background-color: rgba(0,0,0,.78);
+}
 .lebt {
     position: relative;
     top: 70px;
