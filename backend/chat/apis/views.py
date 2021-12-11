@@ -46,6 +46,10 @@ add_feedback_sql = 'insert into feedback(user_name,content,gen_time) values(%s,%
 
 query_withdrawMessages_sql = 'select * from withdrawMessage'
 
+add_withdrawMessage_sql = 'insert into withdrawMessage(username,msg,gentime) values(%s,%s,%s)'
+
+query_feedbacks_sql = 'select * from feedback'
+
 # Create your views here.
 
 
@@ -129,6 +133,9 @@ def delete_msg(request):
                          user="root", password=MyPassWord, database="tempdb")
     cursor = db.cursor()
     cursor.execute(delete_sql, (username, msg, gentime))
+    db.commit()
+    cursor = db.cursor()
+    cursor.execute(add_withdrawMessage_sql, (username, msg, gentime))
     db.commit()
     res = {'code': 0, 'msg': '消息删除成功'}
     return Response(res, status=status.HTTP_200_OK)
@@ -261,4 +268,15 @@ def get_withdrawMessages(request):
     res = cursor.fetchall()
     newres = [OrderedDict([('id', obj[0]), ('username', obj[1]),
                            ('msg', obj[2]), ('gentime', str(obj[3]))]) for obj in res]
+    return Response(newres, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_feedbacks(request):
+    db = pymysql.connect(host="127.0.0.1", port=3306,
+                         user="root", password=MyPassWord, database="tempdb")
+    cursor = db.cursor()
+    res = cursor.execute(query_feedbacks_sql)
+    res = cursor.fetchall()
+    newres = [OrderedDict([('id', obj[0]), ('username', obj[1]),
+                           ('content', obj[2]), ('gentime', str(obj[3]))]) for obj in res]
     return Response(newres, status=status.HTTP_200_OK)
