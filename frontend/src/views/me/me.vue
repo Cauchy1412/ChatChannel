@@ -79,6 +79,7 @@ export default{
       return new Promise((resolve, reject) => {
         sendcontent(this.username, this.content, now.toISOString()).then(response => {
           alert('建议反馈成功！')
+          this.content = ''
           resolve()
         }).catch(error => {
           reject(error)
