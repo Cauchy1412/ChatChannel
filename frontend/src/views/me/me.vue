@@ -42,6 +42,7 @@
 <script>
 import {getUserName, removeUserName} from '../../utils/localStorage'
 import { updatepassword, sendcontent } from '@/api/update'
+let Base64 = require('js-base64').Base64
 export default{
   data () {
     return {
@@ -65,9 +66,12 @@ export default{
       this.$router.goBack()
     },
     updatepassword () {
+      this.password = Base64.encode(this.password)
+      console.log(this.password)
       return new Promise((resolve, reject) => {
         updatepassword(this.username, this.password).then(response => {
           alert('密码更新成功！')
+          this.password = ''
           resolve()
         }).catch(error => {
           reject(error)

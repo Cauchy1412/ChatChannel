@@ -6,6 +6,7 @@ import { getwithdrawMessages, getfeedbacks } from '@/api/admin'
 import { setUserName, getUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { Base64 } from 'js-base64'
 
 Vue.use(Vuex)
 
@@ -124,6 +125,8 @@ export default new Vuex.Store({
   actions: {
     LoginByUsername ({ commit }, userInfo) {
       const username = userInfo.username.trim()
+      userInfo.password = Base64.encode(userInfo.password)
+      console.log(userInfo.password)
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
@@ -145,6 +148,8 @@ export default new Vuex.Store({
     },
     RegisterByUsername ({ commit }, userInfo) {
       const username = userInfo.username.trim()
+      userInfo.password = Base64.encode(userInfo.password)
+      console.log(userInfo.password)
       return new Promise((resolve, reject) => {
         registerByUsername(username, userInfo.password).then(response => {
           const data = response.data
