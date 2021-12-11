@@ -2,6 +2,7 @@ import { loginByUsername } from '@/api/login'
 import { registerByUsername } from '@/api/register'
 import { getHistoryMsg, addHistoryMsg, delHistoryMsg } from '@/api/msg'
 import { adddynamic, getHistoryDynamic, addHistoryComment } from '@/api/dynamic'
+import { getwithdrawMessages, getfeedbacks } from '@/api/admin'
 import { setUserName, getUserName } from '@/utils/localStorage'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -26,7 +27,9 @@ export default new Vuex.Store({
       id: '',
       users: {},
       info: []
-    }
+    },
+    withdrawMessages: [],
+    feedbacks: []
   },
 
   getters: {
@@ -34,7 +37,9 @@ export default new Vuex.Store({
     getUsers: state => state.roomDetail.users,
     getInfo: state => state.roomDetail.info,
     getMsgHistoryInfo: state => state.msgHistory.info,
-    getDynamicsHistoryInfo: state => state.dynamicHistory.info
+    getDynamicsHistoryInfo: state => state.dynamicHistory.info,
+    getfeedbacks: state => state.feedbacks,
+    getwithdrawMessages: state => state.withdrawMessages
   },
 
   mutations: {
@@ -58,6 +63,12 @@ export default new Vuex.Store({
     },
     SET_DYNAMICS_HISTORY_INFO: (state, info) => {
       state.dynamicHistory.info = info
+    },
+    SET_WITHDRAWMESSAGES_INFO: (state, info) => {
+      state.withdrawMessages = info
+    },
+    SET_FEEDBACKS_INFO: (state, info) => {
+      state.feedbacks = info
     },
     DEL_ROOM_DETAIL_INFO: (state, info) => {
       const name = getUserName()
@@ -169,6 +180,28 @@ export default new Vuex.Store({
         getHistoryDynamic().then(response => {
           const data = response.data
           commit('SET_DYNAMICS_HISTORY_INFO', data)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetWithdrawmessages ({ commit }) {
+      return new Promise((resolve, reject) => {
+        getwithdrawMessages().then(response => {
+          const data = response.data
+          commit('SET_WITHDRAWMESSAGES_INFO', data)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetFeedbacks ({ commit }) {
+      return new Promise((resolve, reject) => {
+        getfeedbacks().then(response => {
+          const data = response.data
+          commit('SET_FEEDBACKS_INFO', data)
           resolve()
         }).catch(error => {
           reject(error)

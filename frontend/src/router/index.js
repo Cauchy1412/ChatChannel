@@ -11,6 +11,7 @@ import Me from '@/views/me/me'
 import Chat from '@/views/chat/chat'
 import About from '@/views/about/about'
 import Mydynamics from '@/views/mydynamics/mydynamics'
+import Backstage from '@/views/backstage/backstage'
 
 Router.prototype.goBack = function () {
   this.isBack = true
@@ -50,6 +51,11 @@ const router = new Router({
       path: '/mydynamics',
       name: 'mydynamics',
       component: Mydynamics
+    },
+    {
+      path: '/backstage',
+      name: 'backstage',
+      component: Backstage
     }
   ]
 })

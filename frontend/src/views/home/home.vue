@@ -14,7 +14,8 @@
       <mu-bottom-nav-item value="home" title="主页" icon="restore" to='/' />
       <mu-bottom-nav-item value="me" title="个人中心" icon="favorite" to='/me' />
       <mu-bottom-nav-item value="about" title="关于" icon="location_on" to='/about' />
-      <mu-bottom-nav-item value="mydynamics" title="动态" icon="location_on" to='/mydynamics' />
+      <mu-bottom-nav-item value="mydynamics" title="动态" icon="favorite" to='/mydynamics' />
+      <mu-bottom-nav-item v-if="name == 'admin'" value="backstage" title="后台" icon="restore" to='/backstage' />
     </mu-bottom-nav>
     </div>
   </div>
@@ -25,8 +26,18 @@ import { getUserName } from '../../utils/localStorage'
 export default{
   data () {
     return {
+      name: '',
       bottomNav: 'home'
     }
+  },
+  created () {
+    const username = getUserName()
+    if (!username) {
+      // 防止未登录
+      this.$router.push({path: '/login'})
+    }
+    this.name = username
+    // this.$store.dispatch('SetWebSocket', new WebSocket('ws://localhost:9090/chat/'))
   },
   methods: {
     handleChange (val) {
