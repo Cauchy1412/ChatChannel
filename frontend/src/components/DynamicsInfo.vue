@@ -59,9 +59,9 @@ export default {
         'content': this.content,
         'gen_time': now.toISOString()
       }
+      this.content = ''
       this.$store.dispatch('AddCommentHistory', commentData)
       this.getSocket.send(JSON.stringify(commentData))
-      this.content = ''
     }
   }
 }
